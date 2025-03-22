@@ -1,12 +1,24 @@
-const currentDate = new Date();
-const utcOffset = currentDate.getTimezoneOffset() * 60000; 
-const moscowDate = new Date(currentDate.getTime() + utcOffset + (3 * 60 * 60 * 1000));
-const isMoscowTime = (currentDate.getHours() + (utcOffset / 3600000)) === (new Date().getHours() + 3);
-let adjustedDate;
-if (!isMoscowTime) {
-    adjustedDate = new Date(currentDate.getTime() + (3 * 60 * 60 * 1000)); // UTC + 3
-} else {
-    adjustedDate = new Date(currentDate.getTime() - (3 * 60 * 60 * 1000)); // МСК - 3
+function toMoscowTime(timestamp) {
+  let now = new Date(timestamp); 
+  let moscowOffsetMilliseconds = 3 * 60 * 60 * 1000; 
+  let localOffsetMinutes = now.getTimezoneOffset();
+  let localOffsetMilliseconds = localOffsetMinutes * 60 * 1000;
+  let moscowTimestamp = timestamp + localOffsetMilliseconds + moscowOffsetMilliseconds;
+  let moscowDate = new Date(moscowTimestamp);
+  return moscowDate;
 }
-console.log("Текущая дата и время:", currentDate);
-console.log("Скорректированная дата и время:", adjustedDate);
+function toInternationalTime(timestamp) {
+    let now = new Date(timestamp);
+    let moscowOffsetMilliseconds = 3 * 60 * 60 * 1000; 
+    let localOffsetMinutes = now.getTimezoneOffset();
+    let localOffsetMilliseconds = localOffsetMinutes * 60 * 1000;
+    let internationalTimestamp = timestamp + localOffsetMilliseconds - moscowOffsetMilliseconds;
+    let internationalDate = new Date(internationalTimestamp);
+    return internationalDate;
+}
+let timestamp = new Date().valueOf(); 
+let moscowTime = toMoscowTime(timestamp);
+let internationalTime = toInternationalTime(timestamp);
+console.log("Исходный Timestamp: " + timestamp);
+console.log("Московское время: " + moscowTime.toLocaleString());
+console.log("Международное время: " + internationalTime.toLocaleString());
