@@ -1,0 +1,12 @@
+let birthday = new Date(2007, 5, 24);
+let today = new Date(); 
+let ageInMilliseconds = today.getTime() - birthday.getTime();
+let ageInDays = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24));
+console.log("Вам " + ageInDays + " дней.");
+let ageInYears = today.getFullYear() - birthday.getFullYear();
+let monthDiff = today.getMonth() - birthday.getMonth();
+if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+  ageInYears--;
+}
+console.log("Вам " + ageInYears + " лет");
+
