@@ -1,5 +1,11 @@
-let today = new Date();
-let day = today.getDate();
-let month = today.getMonth() + 1;
-let year = today.getFullYear();
-console.log("Сегодня: " + day + "/" + month + "/" + year);
+function getTodayDate() {
+  const now = new Date(); // Получаем текущую дату и время
+  const timestamp = now.valueOf(); // Преобразуем в timestamp (миллисекунды с 1970)
+  const today = new Date(timestamp);
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); 
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`; 
+}
+const today = getTodayDate();
+console.log("Сегодняшняя дата:", today);
