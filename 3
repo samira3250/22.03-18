@@ -1,9 +1,11 @@
 function isLeapYear(year) {
-  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+  const marchFirst = new Date(year, 2, 1); 
+  const marchFirstTimestamp = marchFirst.valueOf();
+  const februaryLast = new Date(year, 1, 28);
+  const februaryLastTimestamp = februaryLast.valueOf();
+  const differenceInDays = (marchFirstTimestamp - februaryLastTimestamp) / (1000 * 60 * 60 * 24);
+  return differenceInDays > 1;
 }
-let year = 2025;
-if (isLeapYear(year)) {
-  console.log(year + " - високосный год.");
-} else {
-  console.log(year + " - не високосный год.");
-}
+const year = 2025; 
+const leap = isLeapYear(year);
+console.log(`${year} год високосный? ${leap}`);
