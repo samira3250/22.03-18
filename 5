@@ -1,0 +1,12 @@
+const currentDate = new Date();
+const utcOffset = currentDate.getTimezoneOffset() * 60000; // переведем в миллисекунды
+const moscowDate = new Date(currentDate.getTime() + utcOffset + (3 * 60 * 60 * 1000));
+const isMoscowTime = (currentDate.getHours() + (utcOffset / 3600000)) === (new Date().getHours() + 3);
+let adjustedDate;
+if (!isMoscowTime) {
+    adjustedDate = new Date(currentDate.getTime() + (3 * 60 * 60 * 1000)); // UTC + 3
+} else {
+    adjustedDate = new Date(currentDate.getTime() - (3 * 60 * 60 * 1000)); // МСК - 3
+}
+console.log("Текущая дата и время:", currentDate);
+console.log("Скорректированная дата и время:", adjustedDate);
