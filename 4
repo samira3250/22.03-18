@@ -1,0 +1,15 @@
+let birthday = new Date(2007, 5, 24);
+let today = new Date();
+let currentYear = today.getFullYear();
+let age = currentYear - birthday.getFullYear();
+let nextAnniversaryAge = Math.ceil(age / 10) * 10; 
+let nextAnniversaryYear = birthday.getFullYear() + nextAnniversaryAge;
+if (nextAnniversaryYear === currentYear) {
+    if (today.getMonth() > birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() >= birthday.getDate())) {
+        console.log("В этом году у вас юбилей!");
+    } else {
+        console.log("В этом году у вас не юбилей. Ближайший будет в " + nextAnniversaryYear + " году");
+    }
+} else {
+    console.log("В этом году у вас не юбилей. Ближайший будет в " + nextAnniversaryYear + " году");
+}
