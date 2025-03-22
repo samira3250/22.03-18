@@ -1,15 +1,28 @@
-let birthday = new Date(2007, 5, 24);
-let today = new Date();
-let currentYear = today.getFullYear();
-let age = currentYear - birthday.getFullYear();
-let nextAnniversaryAge = Math.ceil(age / 10) * 10; 
-let nextAnniversaryYear = birthday.getFullYear() + nextAnniversaryAge;
-if (nextAnniversaryYear === currentYear) {
-    if (today.getMonth() > birthday.getMonth() || (today.getMonth() === birthday.getMonth() && today.getDate() >= birthday.getDate())) {
-        console.log("В этом году у вас юбилей!");
+function checkAnniversary(birthDateString) {
+  const birthDate = new Date(birthDateString);
+  const birthYear = birthDate.getFullYear();
+  const birthMonth = birthDate.getMonth();
+  const birthDay = birthDate.getDate();
+  const now = new Date();
+  const currentYear = now.getFullYear();
+  const age = currentYear - birthYear;
+  if (age < 0) {
+    return "Дата рождения в будущем!";
+  }
+  const anniversaryYear = age % 10 === 0; 
+  const birthdayThisYear = new Date(currentYear, birthMonth, birthDay);
+  const birthdayThisYearTimestamp = birthdayThisYear.valueOf(); 
+  const nowTimestamp = now.valueOf();
+  if (anniversaryYear) {
+    if (birthdayThisYearTimestamp <= nowTimestamp) {
+      return "В этом году уже был юбилей!";
     } else {
-        console.log("В этом году у вас не юбилей. Ближайший будет в " + nextAnniversaryYear + " году");
+      return "В этом году будет юбилей!";
     }
-} else {
-    console.log("В этом году у вас не юбилей. Ближайший будет в " + nextAnniversaryYear + " году");
+  } else {
+    return "В этом году нет юбилея.";
+  }
 }
+const birthDate = "2007-05-24"; 
+const anniversaryMessage = checkAnniversary(birthDate);
+console.log(anniversaryMessage);
