@@ -1,0 +1,9 @@
+function isLeapYear(year) {
+  return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+}
+let year = 2025;
+if (isLeapYear(year)) {
+  console.log(year + " - високосный год.");
+} else {
+  console.log(year + " - не високосный год.");
+}
